@@ -1,0 +1,16 @@
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.*
+*.terraform
+.terraform/
+
+# Ignore large files
+*.zip
+*.gz
+*.tar
+*.rar
+*.7z
+# Add other file types that tend to be large in your project
+
+.terraform.lock.hcl
+main.tf.bak
