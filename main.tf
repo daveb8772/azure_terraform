@@ -4,6 +4,10 @@ resource "azurerm_user_assigned_identity" "my_managed_identity" {
   resource_group_name = "k8s-resource-group"
 }
 
+variable "tenant_id" {
+  description = "Azure Tenant ID"
+  default     = "6ca1732f-a624-47db-8f92-e1c0463a3992"
+}
 
 
 # Configure Azure provider
@@ -165,10 +169,10 @@ resource "azurerm_postgresql_server" "example" {
 
 
 # Reference the access policy defined in a separate file
-module "key_vault_access_policy" {
-  source = "./access_policy" # Assuming the access policy is defined in a separate folder named "access_policy"
-
-}
+#module "key_vault_access_policy" {
+#  source = "./access_policy" # Assuming the access policy is defined in a separate folder named "access_policy"
+#
+#}
 
 
 # Output for Virtual Network ID:
