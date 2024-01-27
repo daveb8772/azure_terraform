@@ -106,22 +106,6 @@ resource "azurerm_role_definition" "role_assignment_contributor" {
 }
 
 
-# resource "azurerm_role_assignment" "blob_storage_access" {
-#   scope              = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.Storage/storageAccounts/mystorage1701447817" # Replace with your storage account scope
-#   role_definition_id = azurerm_role_definition.role_assignment_contributor.id
-#   principal_id       = var.principal_id # Replace with the principalId obtained
-
-
-# }
-
-# resource "azurerm_role_assignment" "aks_to_storage" {
-#   scope              = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourcegroups/k8s-resource-group/providers/Microsoft.Storage/storageAccounts/mystorage1701447817" # Replace with the ID of the target resource
-#   role_definition_id = azurerm_role_definition.role_assignment_contributor.id                                                                                                  # Replace with the desired role name
-#   principal_id       = var.principal_id                                                                                                                                        # Replace with the principalId obtained
-
-# }
-
-
 
 # Blob Container
 resource "azurerm_storage_container" "storage_container" {
@@ -168,13 +152,25 @@ resource "azurerm_postgresql_server" "example" {
   ssl_enforcement_enabled      = true          # Set to true or false as needed
 }
 
+resource "azurerm_container_registry" "acr" {
+  name                     = "myacr${random_id.acr_suffix.hex}"
+  resource_group_name      = azurerm_resource_group.k8s_rg.name
+  location                 = azurerm_resource_group.k8s_rg.location
+  sku                      = "Basic"
+  admin_enabled            = true
+}
 
+resource "random_id" "acr_suffix" {
+  keepers = {
+    rg_name = azurerm_resource_group.k8s_rg.name
+  }
 
-# Reference the access policy defined in a separate file
-#module "key_vault_access_policy" {
-#  source = "./access_policy" # Assuming the access policy is defined in a separate folder named "access_policy"
-#
-#}
+  byte_length = 8
+}
+
+output "acr_login_server" {
+  value = azurerm_container_registry.acr.login_server
+}
 
 
 # Output for Virtual Network ID:
