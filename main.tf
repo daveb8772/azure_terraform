@@ -59,7 +59,9 @@ resource "azurerm_kubernetes_cluster" "k8s_cluster" {
   default_node_pool {
     name       = "default"
     node_count = 1
-    vm_size    = "Standard_DS2_v2" # Choose a suitable VM size
+    vm_size    = "Standard_B2ps_v2" # Cheaper VM size
+    #vm_size    = "Standard_DS2_v2" # default VM size
+    temporary_name_for_rotation  = "tempdefault"
   }
 
 
