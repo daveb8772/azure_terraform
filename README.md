@@ -21,42 +21,42 @@ This Terraform configuration sets up an Azure Kubernetes Service (AKS) environme
 
 Before applying the Terraform configurations, authenticate with Azure using:
 
-\```bash
+```bash
 az login
-\```
+```
 A web browser will prompt for login credentials. Alternatively, use the device code flow with:
 
-\```bash
+```bash
 az login --use-device-code
-\``` 
+``` 
 
 
 For setting up the Key Vault access policy, run:
 
-\```bash
+```bash
 keyVaultName="mykeyvault1701447817"
 objectId="61aa2c03-789a-4100-82ad-5f06d017d0b4"
 subscriptionId="fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7"
 
 az keyvault set-policy --name $keyVaultName --object-id $objectId --secret-permissions get --subscription $subscriptionId
-\```
+```
 
 ## Running Terraform
 
 Ensure Terraform is installed and configured on your machine. Then, execute the following commands in your terminal:
 
-\```bash
+```bash
 terraform init
 terraform plan
 terraform apply
-\```
+```
 
-##TF Apply Outputs:
+##Terraform  Apply Outputs:
 
-aks_cluster_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.ContainerService/managedClusters/my-aks-cluster"
-aks_cluster_name = "my-aks-cluster"
-key_vault_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.KeyVault/vaults/mykeyvault1701447817"
-resource_group_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group"
-storage_account_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.Storage/storageAccounts/mystorage1701447817"
-subnet_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.Network/virtualNetworks/k8s-virtual-network/subnets/k8s-subnet"
-virtual_network_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.Network/virtualNetworks/k8s-virtual-network"
+- aks_cluster_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.ContainerService/managedClusters/my-aks-cluster"
+- aks_cluster_name = "my-aks-cluster"
+- key_vault_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.KeyVault/vaults/mykeyvault1701447817"
+- resource_group_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group"
+- storage_account_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.Storage/storageAccounts/mystorage1701447817"
+- subnet_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.Network/virtualNetworks/k8s-virtual-network/subnets/k8s-subnet"
+- virtual_network_id = "/subscriptions/fa2afcb7-6cbe-4c32-9cda-2b621a34c7e7/resourceGroups/k8s-resource-group/providers/Microsoft.Network/virtualNetworks/k8s-virtual-network"
